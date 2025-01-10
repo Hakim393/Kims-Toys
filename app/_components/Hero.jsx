@@ -14,11 +14,8 @@ function Hero() {
         backgroundImage: `url('/Assets/bg-mainan.jpg')`,
       }}
     >
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      {/* Content Container */}
       <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 max-w-7xl px-6 lg:px-10 xl:px-12 w-full mx-auto">
-        {/* Text Section */}
         <div className="flex-1 text-center md:text-left">
           <h2
             className="text-pink-500 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4"
@@ -38,6 +35,11 @@ function Hero() {
           <Link href={"/dashboard"}>
             <Button className="px-6 py-3 bg-pink-500 text-white text-sm sm:text-md font-bold rounded-full hover:bg-pink-600 focus:ring-2 focus:ring-pink-400 focus:outline-none shadow-lg">
               Menjual
+            </Button>
+          </Link>
+          <Link href={"/toko"}>
+            <Button className="px-6 py-3 bg-blue-500 text-white text-sm sm:text-md font-bold rounded-full hover:bg-green-600 focus:ring-2 focus:ring-black focus:outline-none shadow-lg">
+              Selengkapnya
             </Button>
           </Link>
         </div>

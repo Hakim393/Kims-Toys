@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import { db } from "/configs/db.js";
-import { productsTable } from "/configs/schema.js";
+import { productsTable, usersTable } from "/configs/schema.js";
+import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 // Konfigurasi Cloudinary
@@ -10,26 +11,33 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// POST: Create new product
 export async function POST(req) {
   try {
-    // Ambil form data
     const formData = await req.formData();
     const title = formData.get("title");
-    const price = formData.get("price");
+    const price = parseInt(formData.get("price"));
     const category = formData.get("category");
     const description = formData.get("description");
-    const about = formData.get("about");
+    const info = formData.get("info");
     const image = formData.get("image");
+    const userEmail = formData.get("userEmail");
 
-    // Validasi input
-    if (!image || !title || !price || !category || !description || !about) {
+    if (
+      !title ||
+      !price ||
+      !category ||
+      !description ||
+      !info ||
+      !image ||
+      !userEmail
+    ) {
       return NextResponse.json(
         { error: "Semua field wajib diisi!" },
         { status: 400 }
       );
     }
 
-    // Pastikan file gambar valid
     if (image.size === 0 || !image.type.startsWith("image/")) {
       return NextResponse.json(
         { error: "File gambar tidak valid!" },
@@ -37,7 +45,6 @@ export async function POST(req) {
       );
     }
 
-    // Upload gambar ke Cloudinary
     const imageBuffer = Buffer.from(await image.arrayBuffer());
     const uploadedImage = await new Promise((resolve, reject) => {
       cloudinary.uploader
@@ -47,11 +54,8 @@ export async function POST(req) {
             folder: "products",
           },
           (error, result) => {
-            if (error) {
-              reject(error);
-            } else {
-              resolve(result);
-            }
+            if (error) reject(error);
+            else resolve(result);
           }
         )
         .end(imageBuffer);
@@ -61,18 +65,32 @@ export async function POST(req) {
       throw new Error("Gagal mengunggah gambar ke Cloudinary.");
     }
 
-    // Simpan produk ke database
+    const user = await db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.email, userEmail))
+      .limit(1);
+
+    if (!user.length) {
+      return NextResponse.json(
+        { error: "Pengguna tidak ditemukan!" },
+        { status: 400 }
+      );
+    }
+
     const newProduct = await db
       .insert(productsTable)
       .values({
         title,
-        price: parseInt(price, 10),
+        price,
         category,
         description,
-        about,
-        imageurl: uploadedImage.secure_url,
+        info,
+        imageUrl: uploadedImage.secure_url,
+        createdBy: user[0].email,
+        creatorImageUrl: user[0].image, // Tambahkan URL avatar pembuat
       })
-      .returning();
+      .returning(productsTable);
 
     return NextResponse.json(newProduct);
   } catch (error) {
@@ -81,4 +99,58 @@ export async function POST(req) {
       { status: 500 }
     );
   }
+}
+
+// GET: Retrieve products by user email
+// GET: Retrieve products with optional user email filter
+export async function GET(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const email = searchParams.get("email");
+    const limit = parseInt(searchParams.get("limit"), 10) || 9; // Default limit 9
+
+    let result;
+
+    if (email) {
+      // Filter by email if provided
+      result = await db
+        .select()
+        .from(productsTable)
+        .where(eq(productsTable.createdBy, email));
+    } else {
+      // Retrieve general products with a limit
+      result = await db.select().from(productsTable).limit(limit);
+    }
+
+    return NextResponse.json(result);
+  } catch (error) {
+    return NextResponse.json(
+      { error: `Failed to fetch products: ${error.message}` },
+      { status: 500 }
+    );
+  }
+}
+
+// PATCH: Placeholder for update product
+export async function PATCH(req) {
+  return NextResponse.json(
+    { message: "Logika edit belum diaktifkan." },
+    { status: 200 }
+  );
+}
+
+// POST_ANALYZE: Placeholder for analyze product
+export async function POST_ANALYZE(req) {
+  return NextResponse.json(
+    { message: "Logika analisis belum diaktifkan." },
+    { status: 200 }
+  );
+}
+
+// DELETE: Placeholder for remove product
+export async function DELETE(req) {
+  return NextResponse.json(
+    { message: "Logika hapus belum diaktifkan." },
+    { status: 200 }
+  );
 }

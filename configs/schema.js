@@ -12,7 +12,11 @@ export const productsTable = pgTable("products", {
   title: varchar().notNull(),
   price: integer().notNull(),
   description: text().notNull(),
-  about: text(),
+  info: text(),
   category: varchar().notNull(),
-  imageurl: varchar().notNull(),
+  imageUrl: varchar().notNull(),
+  createdBy: varchar("createdBy")
+    .notNull()
+    .references(() => usersTable.email),
+  creatorImageUrl: text("creator_image_url"),
 });

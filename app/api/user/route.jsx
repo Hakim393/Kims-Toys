@@ -1,38 +1,48 @@
-import { NextResponse } from "next/server"; // function untuk mengirimkan respons HTTP
-import { eq } from "drizzle-orm"; // operator untuk membandingkan nilai dalam query
-import { usersTable } from "../../../configs/schema"; //from database, untuk menggambarkan skema tabel
-import { db } from "../../../configs/db"; //from database, untuk menggambarkan skema tabel
+import { NextResponse } from "next/server";
+import { eq } from "drizzle-orm";
+import { usersTable } from "../../../configs/schema";
+import { db } from "../../../configs/db";
 
 export async function POST(req) {
   try {
     const { user } = await req.json();
+    console.log("Data user dari request:", user);
 
-    // Periksa apakah user sudah ada di database
+    // Memastikan email user tersedia
+    const userEmail = user?.primaryEmailAddress?.emailAddress;
+    if (!userEmail) {
+      throw new Error("Email user tidak tersedia!");
+    }
+
+    // Cek apakah user sudah ada di database
     const userData = await db
       .select()
       .from(usersTable)
-      .where(eq(usersTable.email, user?.primaryEmailAddress?.emailAddress));
+      .where(eq(usersTable.email, userEmail));
 
-    if (userData.length === 0) {
-      // Jika user tidak ditemukan, tambahkan ke database
-      const [newUser] = await db
+    console.log("Data user dari database:", userData);
+
+    if (userData?.length === 0) {
+      // Menambahkan user ke database jika belum ada
+      const result = await db
         .insert(usersTable)
         .values({
-          name: user?.fullName,
-          email: user?.primaryEmailAddress?.emailAddress,
-          image: user?.imageUrl,
+          name: user?.fullName || user?.username || "Unknown",
+          email: userEmail,
+          image: user?.imageUrl || "",
         })
-        .returning();
+        .returning(usersTable);
 
-      return NextResponse.json(newUser[0]);
+      console.log("Hasil insert user baru:", result);
+      return NextResponse.json(result[0]);
     }
 
-    // Jika user sudah ada, kembalikan data user
+    // Jika user sudah ada, kembalikan data dari database
     return NextResponse.json(userData[0]);
   } catch (error) {
-    console.error("Error handling POST request:", error);
+    console.error("Terjadi error di endpoint POST /api/user:", error.message);
     return NextResponse.json(
-      { error: "An error occurred while processing your request." },
+      { error: "Internal Server Error", details: error.message },
       { status: 500 }
     );
   }

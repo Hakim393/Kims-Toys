@@ -1,8 +1,10 @@
+// layout.js
 import localFont from "next/font/local";
 import "./globals.css";
 import { Funnel_Display } from "next/font/google";
 import Provider from "./provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,8 +17,25 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Funnel+Display&display=swap"
+            rel="stylesheet"
+          />
+        </head>
         <body className={AppFont.className}>
           <Provider>{children}</Provider>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

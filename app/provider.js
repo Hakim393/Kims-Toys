@@ -9,20 +9,20 @@ function Provider({ children }) {
 
   useEffect(() => {
     if (user) {
-      console.log("Data user:", user); // validasi data user
-      PeriksaUser();
+      fetchUserData();
     }
   }, [user]);
 
-  const PeriksaUser = async () => {
+  const fetchUserData = async () => {
     try {
-      const result = await axios.post("/api/user", {
+      const response = await axios.post("/api/user", {
         user,
       });
-      console.log(result.data); // Log hasil dari server
+
+      console.log("Respons dari API /api/user:", response.data); // Debug respons dari API
     } catch (error) {
       console.error(
-        "Terjadi error saat memeriksa user baru:",
+        "Error saat memeriksa atau mengambil data user:",
         error.response?.data || error.message
       );
     }

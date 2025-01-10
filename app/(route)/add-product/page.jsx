@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -12,6 +12,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import UploadImage from "./_components/UploadImage";
 import axios from "axios";
+import { useUser } from "@clerk/nextjs";
+import { Loader2Icon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 function AddProduct() {
   const categories = [
@@ -26,17 +30,17 @@ function AddProduct() {
     "Permainan papan",
   ];
 
-  const [formData, setFormData] = useState({
-    title: "",
-    price: "",
-    category: "",
-    description: "",
-    about: "",
-    image: null,
-  });
-
+  const [formData, setFormData] = useState([]);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const { user } = useUser();
+  useEffect(() => {
+    setFormData({
+      userEmail: user?.primaryEmailAddress?.emailAddress,
+    });
+  }, [user]);
 
   const inputChange = (fieldName, fieldValue) => {
     setFormData((prev) => ({
@@ -46,29 +50,37 @@ function AddProduct() {
   };
 
   const addProductBtnClick = async () => {
+    const { title, price, category, description, info, image, userEmail } =
+      formData;
+
+    if (!title || !price || !category || !description || !info || !image) {
+      alert("Semua kolom wajib diisi!");
+      return;
+    }
+    setIsLoading(true);
+    const formDataObj = new FormData();
+    formDataObj.append("title", title);
+    formDataObj.append("price", price);
+    formDataObj.append("category", category);
+    formDataObj.append("description", description);
+    formDataObj.append("info", info);
+    formDataObj.append("image", image);
+    formDataObj.append("userEmail", userEmail);
+
     try {
-      const { title, price, category, description, about, image } = formData;
-
-      if (!title || !price || !category || !description || !about || !image) {
-        alert("Semua kolom wajib diisi!");
-        return;
-      }
-
       setIsLoading(true);
-
-      const formDataObj = new FormData();
-      formDataObj.append("title", title);
-      formDataObj.append("price", price);
-      formDataObj.append("category", category);
-      formDataObj.append("description", description);
-      formDataObj.append("about", about);
-      formDataObj.append("image", image);
-
       const result = await axios.post("/api/products", formDataObj, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      setIsLoading(true);
+
+      if (result) {
+        toast("Selamat, anda berhasil menambahkan produk baru!!");
+
+        router.push("/dashboard");
+      }
 
       if (result.data.error) {
         alert(result.data.error);
@@ -83,8 +95,9 @@ function AddProduct() {
           price: "",
           category: "",
           description: "",
-          about: "",
+          info: "",
           image: null,
+          userEmail: user?.primaryEmailAddress?.emailAddress,
         });
       }, 1000);
     } catch (error) {
@@ -204,10 +217,10 @@ function AddProduct() {
                 Informasi Tambahan
               </h4>
               <Textarea
-                name="about"
+                name="info"
                 placeholder="Tambahkan informasi tambahan"
                 className="w-full"
-                onChange={(e) => inputChange("about", e.target.value)}
+                onChange={(e) => inputChange("info", e.target.value)}
               />
             </div>
           </div>
@@ -219,7 +232,11 @@ function AddProduct() {
             className="px-8 py-3 bg-blue-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-blue-600 transform hover:scale-105 transition-all duration-300"
             disabled={isLoading}
           >
-            {isLoading ? "Sedang Menambahkan..." : "Tambahkan Produk"}
+            {isLoading ? (
+              <Loader2Icon className="animate-spin" />
+            ) : (
+              "Add Product"
+            )}
           </Button>
         </div>
       </div>
