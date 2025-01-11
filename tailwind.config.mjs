@@ -1,25 +1,47 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   theme: {
-    extend: {
-      colors: {
-        cyan: {
-          300: "#00e0ff",
-          500: "#00c4cc",
-        },
-        purple: {
-          600: "#6a0dad",
-        },
-        gray: {
-          300: "#d1d1d1",
-          400: "#a3a3a3",
-        },
-      },
-      boxShadow: {
-        neon: "0 0 20px #00e0ff, 0 0 40px #6a0dad",
-        "neon-hover": "0 0 30px #00e0ff, 0 0 50px #ff00ff",
-      },
-    },
+  	extend: {
+  		colors: {
+  			cyan: {
+  				'300': '#00e0ff',
+  				'500': '#00c4cc'
+  			},
+  			purple: {
+  				'600': '#6a0dad'
+  			},
+  			gray: {
+  				'300': '#d1d1d1',
+  				'400': '#a3a3a3'
+  			}
+  		},
+  		boxShadow: {
+  			neon: '0 0 20px #00e0ff, 0 0 40px #6a0dad',
+  			'neon-hover': '0 0 30px #00e0ff, 0 0 50px #ff00ff'
+  		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
+  		}
+  	}
   },
   plugins: [],
   darkMode: ["class"],

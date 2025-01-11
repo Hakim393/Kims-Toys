@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import Link from "next/link";
 
 function Toko() {
   const categories = [
@@ -155,49 +156,50 @@ function Toko() {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-full mx-auto">
         {productList.length > 0 ? (
           productList.map((product) => (
-            <Card
-              key={product.id}
-              className="hover:shadow-2xl transform hover:scale-105 transition-transform duration-300 mx-auto w-full max-w-xs"
-            >
-              <CardHeader>
-                <Image
-                  src={product.imageUrl || "/placeholder-image.png"}
-                  alt={product.title || "Gambar produk"}
-                  width={400}
-                  height={400}
-                  className="rounded-xl border-4 border-yellow-400 object-cover shadow-lg"
-                />
-              </CardHeader>
-              <CardContent className="text-center space-y-3">
-                <CardTitle className="text-lg sm:text-2xl font-extrabold text-blue-700 drop-shadow-md">
-                  {product.title || "Nama Produk"}
-                </CardTitle>
-                <CardDescription className="text-sm sm:text-lg font-semibold text-pink-700">
-                  Harga: Rp{" "}
-                  {product.price ? product.price.toLocaleString("id-ID") : "0"}
-                </CardDescription>
-                <p className="text-gray-600 font-medium">
-                  {product.description || "Deskripsi tidak tersedia."}
-                </p>
-              </CardContent>
-              <CardFooter className="flex flex-col items-center space-y-3">
-                <div className="flex items-center space-x-3">
+            <Link href={`/toko/${product?.id}`} key={product.id}>
+              <Card className="hover:shadow-2xl transform hover:scale-105 transition-transform duration-300 mx-auto w-full max-w-xs">
+                <CardHeader>
                   <Image
-                    src={product.creatorImageUrl || "/placeholder-avatar.png"}
-                    alt={product.createdBy || "Foto pembuat"}
-                    width={40}
-                    height={40}
-                    className="rounded-full border-2 border-gray-300 object-cover"
+                    src={product.imageUrl || "/placeholder-image.png"}
+                    alt={product.title || "Gambar produk"}
+                    width={400}
+                    height={400}
+                    className="rounded-xl border-4 border-yellow-400 object-cover shadow-lg"
                   />
-                  <span className="text-sm sm:text-md text-gray-700 font-semibold">
-                    {product.createdBy || "Unknown"}
-                  </span>
-                </div>
-                <Button className="bg-gradient-to-r from-green-400 to-yellow-500 text-white font-bold py-2 px-4 sm:px-6 rounded-lg shadow-lg hover:scale-110 transition-transform duration-200">
-                  Tambah ke Keranjang
-                </Button>
-              </CardFooter>
-            </Card>
+                </CardHeader>
+                <CardContent className="text-center space-y-3">
+                  <CardTitle className="text-lg sm:text-2xl font-extrabold text-blue-700 drop-shadow-md">
+                    {product.title || "Nama Produk"}
+                  </CardTitle>
+                  <CardDescription className="text-sm sm:text-lg font-semibold text-pink-700">
+                    Harga: Rp{" "}
+                    {product.price
+                      ? product.price.toLocaleString("id-ID")
+                      : "0"}
+                  </CardDescription>
+                  <p className="text-gray-600 font-medium">
+                    {product.description || "Deskripsi tidak tersedia."}
+                  </p>
+                </CardContent>
+                <CardFooter className="flex flex-col items-center space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <Image
+                      src={product.creatorImageUrl || "/placeholder-avatar.png"}
+                      alt={product.createdBy || "Foto pembuat"}
+                      width={40}
+                      height={40}
+                      className="rounded-full border-2 border-gray-300 object-cover"
+                    />
+                    <span className="text-sm sm:text-md text-gray-700 font-semibold">
+                      {product.createdBy || "Unknown"}
+                    </span>
+                  </div>
+                  <Button className="bg-gradient-to-r from-green-400 to-yellow-500 text-white font-bold py-2 px-4 sm:px-6 rounded-lg shadow-lg hover:scale-110 transition-transform duration-200">
+                    Tambah ke Keranjang
+                  </Button>
+                </CardFooter>
+              </Card>
+            </Link>
           ))
         ) : (
           <p className="text-center col-span-full text-gray-500">
