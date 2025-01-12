@@ -10,7 +10,7 @@ function Checkout() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { user, isLoaded, isSignedIn } = useUser(); // Menambahkan isLoaded dan isSignedIn untuk cek status login
+  const { user, isLoaded, isSignedIn } = useUser();
 
   useEffect(() => {
     async function fetchCart() {
@@ -43,7 +43,7 @@ function Checkout() {
     }
 
     fetchCart();
-  }, [user, isLoaded, isSignedIn]); // Menambahkan dependensi isLoaded dan isSignedIn
+  }, [user, isLoaded, isSignedIn]);
 
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
