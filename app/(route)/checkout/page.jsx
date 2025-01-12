@@ -5,7 +5,6 @@ import axios from "axios";
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { PayPalButtons } from "@paypal/react-paypal-js";
-import { log } from "console";
 
 function Checkout() {
   const [cart, setCart] = useState([]);
@@ -78,18 +77,15 @@ function Checkout() {
       }
     } catch (err) {
       if (err.response && err.response.data) {
-        // Log error respons server
         console.error("Error dari server:", err.response.data);
         alert(
           err.response.data.message ||
             "Terjadi kesalahan di server. Mohon coba lagi atau hubungi dukungan kami."
         );
       } else if (err.request) {
-        // Log jika server tidak merespons
         console.error("Tidak ada respons dari server:", err.request);
         alert("Server tidak merespons. Mohon periksa koneksi Anda.");
       } else {
-        // Log error lainnya
         console.error("Error saat mengirim transaksi:", err.message);
         alert("Terjadi kesalahan yang tidak diketahui. Mohon coba lagi.");
       }

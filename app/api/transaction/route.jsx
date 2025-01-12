@@ -112,13 +112,13 @@ export default async function handler(req, res) {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "fikhihakim45@gmail.com", // Ganti dengan email Anda
-          pass: "1Nform4tik4393", // Ganti dengan App Password
+          user: "fikhihakim45@gmail.com",
+          pass: "1Nform4tik4393",
         },
       });
 
       const mailOptions = {
-        from: "fikhihakim45@gmail.com", // Ganti dengan email Anda
+        from: "fikhihakim45@gmail.com",
         to: email,
         subject: "Invoice Pembayaran Anda",
         html: invoiceHTML,

@@ -26,7 +26,6 @@ export async function POST(req) {
       .limit(1);
 
     if (existingItem) {
-      // Jika sudah ada, update quantity
       const updatedItem = await db
         .update(cartTable)
         .set({ quantity: existingItem.quantity + 1 })
@@ -34,7 +33,6 @@ export async function POST(req) {
         .returning(cartTable);
       return NextResponse.json(updatedItem);
     } else {
-      // Jika belum ada, tambahkan produk baru
       const newItem = await db
         .insert(cartTable)
         .values({

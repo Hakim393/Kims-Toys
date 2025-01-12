@@ -1,4 +1,4 @@
-"use client"; // Tambahkan ini di baris paling atas
+"use client";
 
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";

@@ -31,7 +31,6 @@ function Header() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // untuk memperbarui jumlah produk
   const updateCartQuantity = async (id, change) => {
     const product = cart.find((item) => item.id === id);
     if (!product) return;
@@ -39,7 +38,6 @@ function Header() {
     const newQuantity = product.quantity + change;
     const previousCart = [...cart];
 
-    // Optimistic update
     const updatedCart = cart.map((item) =>
       item.id === id ? { ...item, quantity: newQuantity } : item
     );
@@ -68,7 +66,7 @@ function Header() {
       }
     } catch (error) {
       console.error(error);
-      setCart(previousCart); // Rollback on failure
+      setCart(previousCart);
     } finally {
       setIsLoading(false);
     }
@@ -90,7 +88,7 @@ function Header() {
           );
         } else {
           const data = await response.json();
-          setCart(data); // Simpan data keranjang ke state
+          setCart(data);
         }
       } catch (error) {
         console.error("Error fetching cart data:", error);

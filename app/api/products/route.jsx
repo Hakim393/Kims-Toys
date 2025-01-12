@@ -88,7 +88,7 @@ export async function POST(req) {
         info,
         imageUrl: uploadedImage.secure_url,
         createdBy: user[0].email,
-        creatorImageUrl: user[0].image, // Tambahkan URL avatar pembuat
+        creatorImageUrl: user[0].image,
       })
       .returning(productsTable);
 
@@ -105,7 +105,7 @@ export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
     const email = searchParams.get("email");
-    const limit = parseInt(searchParams.get("limit"), 10) || 9; // limit maksimal 9
+    const limit = parseInt(searchParams.get("limit"), 10) || 9;
 
     let result;
 

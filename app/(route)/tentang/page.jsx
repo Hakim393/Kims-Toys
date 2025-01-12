@@ -18,7 +18,6 @@ function Tentang() {
 
       {/* Main Content */}
       <main className="container mx-auto px-6 py-10 space-y-16">
-        {/* Tentang Kami Section */}
         <section className="text-center">
           <h2 className="text-4xl font-bold text-teal-300">Tentang Kami</h2>
           <p className="text-gray-300 mt-4 leading-relaxed">

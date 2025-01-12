@@ -18,7 +18,7 @@ function UploadImage({ onImageSelect }) {
       return;
     }
 
-    setError(""); // Clear error if valid
+    setError("");
     onImageSelect(event);
 
     const reader = new FileReader();
