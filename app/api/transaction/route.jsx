@@ -32,6 +32,7 @@ export default async function handler(req, res) {
           message: "Pengguna tidak ditemukan.",
         });
       }
+      console.log(user);
 
       // Ambil data produk dari keranjang
       const cartItems = await db

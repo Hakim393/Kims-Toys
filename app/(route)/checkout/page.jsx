@@ -10,12 +10,22 @@ function Checkout() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { user } = useUser();
+  const { user, isLoaded, isSignedIn } = useUser(); // Menambahkan isLoaded dan isSignedIn untuk cek status login
 
   useEffect(() => {
     async function fetchCart() {
-      if (!user?.emailAddresses) {
+      if (!isLoaded) {
+        return; // Tunggu hingga hook selesai memuat user
+      }
+
+      if (!isSignedIn) {
         setError("Anda perlu login untuk melihat keranjang.");
+        setLoading(false);
+        return;
+      }
+
+      if (!user?.emailAddresses) {
+        setError("Data email pengguna tidak ditemukan.");
         setLoading(false);
         return;
       }
@@ -33,7 +43,7 @@ function Checkout() {
     }
 
     fetchCart();
-  }, [user]);
+  }, [user, isLoaded, isSignedIn]); // Menambahkan dependensi isLoaded dan isSignedIn
 
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
