@@ -33,12 +33,12 @@ function Toko() {
     "Permainan papan",
   ];
 
-  const sortOptions = [
-    { value: "price:asc", label: "Harga Terendah" },
-    { value: "price:desc", label: "Harga Tertinggi" },
-    { value: "title:asc", label: "Nama (A-Z)" },
-    { value: "title:desc", label: "Nama (Z-A)" },
-  ];
+  // const sortOptions = [
+  //   { value: "price:asc", label: "Harga Terendah" },
+  //   { value: "price:desc", label: "Harga Tertinggi" },
+  //   { value: "title:asc", label: "Nama (A-Z)" },
+  //   { value: "title:desc", label: "Nama (Z-A)" },
+  // ];
 
   const handleSortChange = (value) => {
     setSort(value);

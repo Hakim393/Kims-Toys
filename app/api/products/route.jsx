@@ -101,24 +101,20 @@ export async function POST(req) {
   }
 }
 
-// GET: Retrieve products by user email
-// GET: Retrieve products with optional user email filter
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
     const email = searchParams.get("email");
-    const limit = parseInt(searchParams.get("limit"), 10) || 9; // Default limit 9
+    const limit = parseInt(searchParams.get("limit"), 10) || 9; // limit maksimal 9
 
     let result;
 
     if (email) {
-      // Filter by email if provided
       result = await db
         .select()
         .from(productsTable)
         .where(eq(productsTable.createdBy, email));
     } else {
-      // Retrieve general products with a limit
       result = await db.select().from(productsTable).limit(limit);
     }
 
@@ -131,26 +127,26 @@ export async function GET(req) {
   }
 }
 
-// PATCH: Placeholder for update product
+// EDIT
 export async function PATCH(req) {
   return NextResponse.json(
-    { message: "Logika edit belum diaktifkan." },
+    { message: " edit belum diaktifkan." },
     { status: 200 }
   );
 }
 
-// POST_ANALYZE: Placeholder for analyze product
+// ANALYZE
 export async function POST_ANALYZE(req) {
   return NextResponse.json(
-    { message: "Logika analisis belum diaktifkan." },
+    { message: " analisis belum diaktifkan." },
     { status: 200 }
   );
 }
 
-// DELETE: Placeholder for remove product
+// DELETE
 export async function DELETE(req) {
   return NextResponse.json(
-    { message: "Logika hapus belum diaktifkan." },
+    { message: " hapus belum diaktifkan." },
     { status: 200 }
   );
 }

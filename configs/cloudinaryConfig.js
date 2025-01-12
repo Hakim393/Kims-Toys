@@ -1,7 +1,6 @@
-// Import the Cloudinary library
 import { v2 as cloudinary } from "cloudinary";
 
-// Validate that required environment variables are present
+// Validasi bahwa environment variable yang diperlukan sudah ada
 const requiredEnvVars = [
   "CLOUDINARY_CLOUD_NAME",
   "CLOUDINARY_API_KEY",
@@ -14,32 +13,31 @@ requiredEnvVars.forEach((varName) => {
   }
 });
 
-// Configure Cloudinary using environment variables
+// Konfigurasi Cloudinary menggunakan environment variables
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Export a function for uploading files
+// Export function untuk upload file
 export const uploadToCloudinary = async (file, folder) => {
   try {
     const options = {
-      folder: folder || "default-folder", // Optional folder to organize uploads
-      resource_type: "auto", // Automatically detect the file type
-      use_filename: true, // Use original file name
-      unique_filename: false, // Avoid generating a random file name
+      folder: folder || "default-folder",
+      resource_type: "auto",
+      use_filename: true,
+      unique_filename: false,
     };
 
-    // Upload the file to Cloudinary
+    // Upload file ke cloudinary
     const result = await cloudinary.uploader.upload(file, options);
 
-    return result; // Return Cloudinary response
+    return result;
   } catch (error) {
     console.error("Error uploading to Cloudinary:", error);
     throw new Error("Failed to upload to Cloudinary.");
   }
 };
 
-// Export the Cloudinary configuration for use elsewhere
 export default cloudinary;

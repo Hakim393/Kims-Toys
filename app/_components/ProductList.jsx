@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCardItem from "./ProductCardItem";
+import { useUser } from "@clerk/nextjs";
 
 function ProductList() {
   const [productList, setProductList] = useState([]);
@@ -31,6 +32,8 @@ function ProductList() {
     }
   };
 
+  const { user } = useUser();
+
   return (
     <div>
       <h2 className="font-bold text-lg flex justify-between items-center">
@@ -52,7 +55,7 @@ function ProductList() {
             ))
           : productList.length > 0
           ? productList.map((product, index) => (
-              <ProductCardItem product={product} key={index} />
+              <ProductCardItem product={product} key={index} user={user} />
             ))
           : "Tidak ada produk tersedia."}
       </div>

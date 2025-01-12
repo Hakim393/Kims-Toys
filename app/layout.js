@@ -1,10 +1,9 @@
 // layout.js
-import localFont from "next/font/local";
 import "./globals.css";
-import { Funnel_Display } from "next/font/google";
-import Provider from "./provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import Provider from "./provider";
+import { Funnel_Display } from "next/font/google";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,7 +14,9 @@ const AppFont = Funnel_Display({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang="en">
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />

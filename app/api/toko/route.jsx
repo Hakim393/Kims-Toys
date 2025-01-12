@@ -17,7 +17,7 @@ export async function GET(req) {
 
       if (!product.length) {
         return NextResponse.json(
-          { error: "Product not found" },
+          { error: "Produk tidak ditemukan" },
           { status: 404 }
         );
       }
@@ -31,7 +31,7 @@ export async function GET(req) {
   } catch (error) {
     console.error("Error in GET request:", error);
     return NextResponse.json(
-      { error: `Failed to fetch product: ${error.message}` },
+      { error: `Gagal mengambil data produk: ${error.message}` },
       { status: 500 }
     );
   }
@@ -60,22 +60,21 @@ export async function POST(req) {
       whereConditions.push(eq(productsTable.category, filter));
     }
 
-    // Gabungkan semua kondisi WHERE
     if (whereConditions.length > 0) {
       query = query.where(and(...whereConditions));
     }
 
-    // Sorting
-    if (sort) {
-      const [key, direction] = sort.split(":");
-      if (["price", "title"].includes(key)) {
-        const sortDirection = direction === "desc" ? "desc" : "asc";
-        query = query.orderBy(
-          key === "title" ? productsTable[key].lowercase() : productsTable[key],
-          sortDirection
-        );
-      }
-    }
+    // // Sorting
+    // if (sort) {
+    //   const [key, direction] = sort.split(":");
+    //   if (["price", "title"].includes(key)) {
+    //     const sortDirection = direction === "desc" ? "desc" : "asc";
+    //     query = query.orderBy(
+    //       key === "title" ? productsTable[key].lowercase() : productsTable[key],
+    //       sortDirection
+    //     );
+    //   }
+    // }
 
     // Limit data
     query = query.limit(limit);
