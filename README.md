@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Proyek Next.js
+Ini adalah proyek Next.js yang dibuat menggunakan create-next-app.
 
-## Getting Started
+Memulai
+Pertama, jalankan server pengembangan:
 
-First, run the development server:
-
-```bash
+bash
+Copy code
 npm run dev
-# or
+
+# atau
+
 yarn dev
-# or
+
+# atau
+
 pnpm dev
-# or
+
+# atau
+
 bun dev
-```
+Buka <http://localhost:3000> di browser untuk melihat hasilnya.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Anda dapat mulai mengedit halaman dengan memodifikasi file app/page.js. Halaman akan diperbarui secara otomatis saat Anda mengedit file.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Proyek ini menggunakan next/font untuk mengoptimalkan dan memuat font Geist secara otomatis, sebuah keluarga font baru dari Vercel.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Environment Variables
+Jangan lupa untuk membuat file .env di direktori root proyek Anda. Berikut adalah contoh format file .env yang diperlukan. Sesuaikan isi dengan data Anda sendiri:
 
-## Learn More
+env
+Copy code
+DATABASE_URL=postgresql://username_anda:password_anda@host_anda/database_anda?sslmode=require
 
-To learn more about Next.js, take a look at the following resources:
+NEXT_PUBLIC_DATABASE_URL=postgresql://username_anda:password_anda@host_anda/database_anda?sslmode=require
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=publishable_key_anda
+CLERK_SECRET_KEY=secret_key_anda
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 
-## Deploy on Vercel
+CLOUDINARY_CLOUD_NAME=nama_cloudinary_anda
+CLOUDINARY_API_KEY=api_key_cloudinary_anda
+CLOUDINARY_API_SECRET=api_secret_cloudinary_anda
+CLOUDINARY_UPLOAD_PRESET=upload_preset_anda
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+NEXT_PUBLIC_PAYPAL_CLIENT_ID=client_id_paypal_anda
+EMAIL_USER=email_anda
+EMAIL_PASS=password_email_anda
+Pelajari Lebih Lanjut
+Untuk mempelajari lebih lanjut tentang Next.js, lihat sumber daya berikut:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Dokumentasi Next.js - Pelajari tentang fitur dan API Next.js.
+Belajar Next.js - Tutorial interaktif Next.js.
+Anda juga dapat melihat repositori GitHub Next.js - kami menyambut umpan balik dan kontribusi Anda!
+
+Deploy di Vercel
+Cara termudah untuk melakukan deploy aplikasi Next.js Anda adalah menggunakan Platform Vercel dari pembuat Next.js.
+
+Lihat dokumentasi deployment Next.js untuk informasi lebih lanjut.
