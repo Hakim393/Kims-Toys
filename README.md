@@ -1,4 +1,4 @@
-  <h1>Proyek Next.js</h1>
+<h1>Proyek Next.js</h1>
     <p>
         Ini adalah proyek Next.js yang dibuat menggunakan <code>create-next-app</code>. 
         Proyek ini adalah sebuah platform e-commerce untuk toko mainan, dirancang agar mudah 
@@ -19,12 +19,12 @@
     </ul>
     <p>Teknologi ini dipilih untuk memberikan kinerja, skalabilitas, dan pengalaman pengguna yang optimal.</p>
 
-  <h2>Variabel Lingkungan (Environment Variables)</h2>
+  <h2>Environment Variables</h2>
     <p>
-        Proyek ini membutuhkan file <code>.env</code> yang berisi variabel lingkungan penting untuk menjalankan aplikasi. 
+        Proyek ini membutuhkan file <code>.env</code> yang berisi environment variables penting untuk menjalankan aplikasi. 
         File ini harus diletakkan di direktori root proyek Anda.
     </p>
-    <p>Berikut adalah deskripsi untuk setiap variabel lingkungan yang dibutuhkan:</p>
+    <p>Berikut adalah deskripsi untuk setiap environment variable yang dibutuhkan:</p>
     <ul>
         <li><code>DATABASE_URL</code>: URL koneksi ke database PostgreSQL yang digunakan oleh aplikasi.</li>
         <li><code>NEXT_PUBLIC_DATABASE_URL</code>: URL koneksi ke database PostgreSQL, diakses dari bagian frontend aplikasi.</li>
@@ -63,7 +63,7 @@ yarn dev</code></pre>
         <li><strong>Akses Aplikasi</strong>: Buka <a href="http://localhost:3000">http://localhost:3000</a> di browser Anda untuk melihat aplikasi.</li>
     </ol>
 
-    <h2>Deploy</h2>
+  <h2>Deploy</h2>
     <p>
         Aplikasi ini dapat dengan mudah dideploy menggunakan <a href="https://vercel.com/">Vercel</a>. 
         Untuk informasi lebih lanjut, silakan baca 
