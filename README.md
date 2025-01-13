@@ -1,104 +1,71 @@
-Proyek Next.js
-Ini adalah proyek Next.js yang dibuat menggunakan create-next-app. Proyek ini adalah sebuah platform e-commerce untuk toko mainan, dirancang agar mudah dikembangkan, dioptimalkan, dan dikelola.
+  <h1>Proyek Next.js</h1>
+    <p>
+        Ini adalah proyek Next.js yang dibuat menggunakan <code>create-next-app</code>. 
+        Proyek ini adalah sebuah platform e-commerce untuk toko mainan, dirancang agar mudah 
+        dikembangkan, dioptimalkan, dan dikelola.
+    </p>
 
-Teknologi Utama yang Digunakan
-Proyek ini dibangun dengan beberapa teknologi utama berikut:
+  <h2>Teknologi Utama yang Digunakan</h2>
+    <p>Proyek ini dibangun dengan beberapa teknologi utama berikut:</p>
+    <ul>
+        <li><strong>Next.js</strong>: Framework React modern yang mendukung server-side rendering (SSR), static site generation (SSG), dan berbagai fitur lain untuk membangun aplikasi web yang cepat dan SEO-friendly.</li>
+        <li><strong>React</strong>: Library JavaScript untuk membangun antarmuka pengguna (UI) yang dinamis dan interaktif.</li>
+        <li><strong>Tailwind CSS</strong>: Framework CSS berbasis utilitas yang memungkinkan pengembang untuk dengan cepat menerapkan desain UI tanpa perlu menulis CSS secara manual.</li>
+        <li><strong>Clerk</strong>: Layanan autentikasi untuk menangani login, registrasi, dan pengelolaan pengguna di aplikasi Next.js.</li>
+        <li><strong>Cloudinary</strong>: Layanan cloud yang digunakan untuk mengelola dan mengoptimalkan media, termasuk gambar dan video, guna memastikan performa aplikasi tetap cepat.</li>
+        <li><strong>PayPal React SDK</strong>: Integrasi dengan layanan pembayaran PayPal untuk memproses transaksi secara aman.</li>
+        <li><strong>pg</strong>: Library PostgreSQL untuk koneksi dan eksekusi kueri database dari Node.js.</li>
+        <li><strong>Nodemailer</strong>: Library yang digunakan untuk mengirimkan email, seperti konfirmasi pesanan atau pemberitahuan lain.</li>
+    </ul>
+    <p>Teknologi ini dipilih untuk memberikan kinerja, skalabilitas, dan pengalaman pengguna yang optimal.</p>
 
-Next.js: Framework React modern yang mendukung server-side rendering (SSR), static site generation (SSG), dan berbagai fitur lain untuk membangun aplikasi web yang cepat dan SEO-friendly.
+  <h2>Variabel Lingkungan (Environment Variables)</h2>
+    <p>
+        Proyek ini membutuhkan file <code>.env</code> yang berisi variabel lingkungan penting untuk menjalankan aplikasi. 
+        File ini harus diletakkan di direktori root proyek Anda.
+    </p>
+    <p>Berikut adalah deskripsi untuk setiap variabel lingkungan yang dibutuhkan:</p>
+    <ul>
+        <li><code>DATABASE_URL</code>: URL koneksi ke database PostgreSQL yang digunakan oleh aplikasi.</li>
+        <li><code>NEXT_PUBLIC_DATABASE_URL</code>: URL koneksi ke database PostgreSQL, diakses dari bagian frontend aplikasi.</li>
+        <li><code>NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</code>: Kunci publik dari Clerk untuk autentikasi pengguna.</li>
+        <li><code>CLERK_SECRET_KEY</code>: Kunci rahasia dari Clerk untuk operasi backend.</li>
+        <li><code>NEXT_PUBLIC_CLERK_SIGN_IN_URL</code>: URL untuk halaman login pengguna.</li>
+        <li><code>NEXT_PUBLIC_CLERK_SIGN_UP_URL</code>: URL untuk halaman registrasi pengguna.</li>
+        <li><code>CLOUDINARY_CLOUD_NAME</code>: Nama cloud pada akun Cloudinary Anda.</li>
+        <li><code>CLOUDINARY_API_KEY</code>: API Key dari Cloudinary untuk otentikasi.</li>
+        <li><code>CLOUDINARY_API_SECRET</code>: API Secret dari Cloudinary untuk operasi backend.</li>
+        <li><code>CLOUDINARY_UPLOAD_PRESET</code>: Preset unggahan untuk konfigurasi pengelolaan media.</li>
+        <li><code>NEXT_PUBLIC_PAYPAL_CLIENT_ID</code>: Client ID dari PayPal untuk memproses pembayaran.</li>
+        <li><code>EMAIL_USER</code>: Alamat email yang digunakan untuk mengirimkan email melalui Nodemailer.</li>
+        <li><code>EMAIL_PASS</code>: Password atau token autentikasi untuk alamat email tersebut.</li>
+    </ul>
+    <p><strong>Catatan Penting:</strong> Jangan pernah membagikan file <code>.env</code> Anda secara publik. Pastikan file ini tetap aman untuk menjaga kerahasiaan data.</p>
 
-React: Library JavaScript untuk membangun antarmuka pengguna (UI) yang dinamis dan interaktif.
-
-Tailwind CSS: Framework CSS berbasis utilitas yang memungkinkan pengembang untuk dengan cepat menerapkan desain UI tanpa perlu menulis CSS secara manual.
-
-Clerk: Layanan autentikasi untuk menangani login, registrasi, dan pengelolaan pengguna di aplikasi Next.js.
-
-Cloudinary: Layanan cloud yang digunakan untuk mengelola dan mengoptimalkan media, termasuk gambar dan video, guna memastikan performa aplikasi tetap cepat.
-
-PayPal React SDK: Integrasi dengan layanan pembayaran PayPal untuk memproses transaksi secara aman.
-
-pg: Library PostgreSQL untuk koneksi dan eksekusi kueri database dari Node.js.
-
-Nodemailer: Library yang digunakan untuk mengirimkan email, seperti konfirmasi pesanan atau pemberitahuan lain.
-
-Teknologi ini dipilih untuk memberikan kinerja, skalabilitas, dan pengalaman pengguna yang optimal.
-
-Variabel Lingkungan (Environment Variables)
-Proyek ini membutuhkan file .env yang berisi variabel lingkungan penting untuk menjalankan aplikasi. File ini harus diletakkan di direktori root proyek Anda.
-
-Berikut adalah deskripsi untuk setiap variabel lingkungan yang dibutuhkan:
-
-env
-Copy code
-DATABASE_URL=postgresql://username_anda:password_anda@host_anda/database_anda?sslmode=require
-DATABASE_URL: URL koneksi ke database PostgreSQL yang digunakan oleh aplikasi.
-env
-Copy code
-NEXT_PUBLIC_DATABASE_URL=postgresql://username_anda:password_anda@host_anda/database_anda?sslmode=require
-NEXT_PUBLIC_DATABASE_URL: URL koneksi ke database PostgreSQL, diakses dari bagian frontend aplikasi.
-env
-Copy code
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=publishable_key_anda
-CLERK_SECRET_KEY=secret_key_anda
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: Kunci publik dari Clerk untuk autentikasi pengguna.
-CLERK_SECRET_KEY: Kunci rahasia dari Clerk untuk operasi backend.
-env
-Copy code
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_SIGN_IN_URL: URL untuk halaman login pengguna.
-NEXT_PUBLIC_CLERK_SIGN_UP_URL: URL untuk halaman registrasi pengguna.
-env
-Copy code
-CLOUDINARY_CLOUD_NAME=nama_cloudinary_anda
-CLOUDINARY_API_KEY=api_key_cloudinary_anda
-CLOUDINARY_API_SECRET=api_secret_cloudinary_anda
-CLOUDINARY_UPLOAD_PRESET=upload_preset_anda
-CLOUDINARY_CLOUD_NAME: Nama cloud pada akun Cloudinary Anda.
-CLOUDINARY_API_KEY: API Key dari Cloudinary untuk otentikasi.
-CLOUDINARY_API_SECRET: API Secret dari Cloudinary untuk operasi backend.
-CLOUDINARY_UPLOAD_PRESET: Preset unggahan untuk konfigurasi pengelolaan media.
-env
-Copy code
-NEXT_PUBLIC_PAYPAL_CLIENT_ID=client_id_paypal_anda
-NEXT_PUBLIC_PAYPAL_CLIENT_ID: Client ID dari PayPal untuk memproses pembayaran.
-env
-Copy code
-EMAIL_USER=email_anda
-EMAIL_PASS=password_email_anda
-EMAIL_USER: Alamat email yang digunakan untuk mengirimkan email melalui Nodemailer.
-EMAIL_PASS: Password atau token autentikasi untuk alamat email tersebut.
-Catatan Penting: Jangan pernah membagikan file .env Anda secara publik. Pastikan file ini tetap aman untuk menjaga kerahasiaan data.
-
-Memulai
-Ikuti langkah-langkah berikut untuk menjalankan proyek ini:
-
-Clone Repository Salin repository ke komputer lokal Anda:
-
-bash
-Copy code
-git clone <https://github.com/username/toko-mainan-ecommerce.git>
-cd toko-mainan-ecommerce
-Instal Dependensi Instal semua dependensi yang diperlukan:
-
-bash
-Copy code
-npm install
-
+  <h2>Memulai</h2>
+    <p>Ikuti langkah-langkah berikut untuk menjalankan proyek ini:</p>
+    <ol>
+        <li><strong>Clone Repository</strong>: Salin repository ke komputer lokal Anda:
+            <pre><code>git clone https://github.com/username/toko-mainan-ecommerce.git
+cd toko-mainan-ecommerce</code></pre>
+        </li>
+        <li><strong>Instal Dependensi</strong>: Instal semua dependensi yang diperlukan:
+            <pre><code>npm install
 # atau
-
-yarn install
-Buat File .env Buat file .env di direktori root dan tambahkan variabel lingkungan sesuai format di atas.
-
-Jalankan Server Pengembangan Jalankan aplikasi dalam mode pengembangan:
-
-bash
-Copy code
-npm run dev
-
+yarn install</code></pre>
+        </li>
+        <li><strong>Buat File <code>.env</code></strong>: Buat file <code>.env</code> di direktori root dan tambahkan variabel lingkungan sesuai format di atas.</li>
+        <li><strong>Jalankan Server Pengembangan</strong>: Jalankan aplikasi dalam mode pengembangan:
+            <pre><code>npm run dev
 # atau
+yarn dev</code></pre>
+        </li>
+        <li><strong>Akses Aplikasi</strong>: Buka <a href="http://localhost:3000">http://localhost:3000</a> di browser Anda untuk melihat aplikasi.</li>
+    </ol>
 
-yarn dev
-Akses Aplikasi Buka <http://localhost:3000> di browser Anda untuk melihat aplikasi.
-
-Deploy
-Aplikasi ini dapat dengan mudah dideploy menggunakan Vercel. Untuk informasi lebih lanjut, silakan baca dokumentasi deployment Next.js.
+    <h2>Deploy</h2>
+    <p>
+        Aplikasi ini dapat dengan mudah dideploy menggunakan <a href="https://vercel.com/">Vercel</a>. 
+        Untuk informasi lebih lanjut, silakan baca 
+        <a href="https://nextjs.org/docs/app/building-your-application/deploying">dokumentasi deployment Next.js</a>.
+    </p>
