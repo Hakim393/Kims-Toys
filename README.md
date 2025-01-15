@@ -2,7 +2,8 @@
     <p>
         Ini adalah proyek Next.js yang dibuat menggunakan <code>create-next-app</code>. 
         Proyek ini adalah sebuah platform e-commerce untuk toko mainan, dirancang agar mudah 
-        dikembangkan, dioptimalkan, dan dikelola.
+        dikembangkan, dioptimalkan, dan dikelola. Anda dapat mengakses aplikasi yang sudah dideploy di 
+        <a href="https://kims-toys-5tpnvpkf7-fikhi-hakims-projects.vercel.app/">Klick disini./</a>.
     </p>
 
   <h2>Teknologi Utama yang Digunakan</h2>
