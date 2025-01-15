@@ -16,7 +16,6 @@ import { CartContext } from "../_context/CartContext";
 function ProductCardItem({ product, user }) {
   const { cart, setCart } = useContext(CartContext);
   const [loading, setLoading] = useState(false);
-  // const { user } = useUser();
   const addToCart = async () => {
     setLoading(true);
     const result = await axios.post("/api/cart", {

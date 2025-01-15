@@ -1,4 +1,3 @@
-// layout.js
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";

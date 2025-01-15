@@ -10,7 +10,6 @@ export default function Home() {
     const snapScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
     const clientKey = process.env.NEXT_PUBLIC_CLIENT;
 
-    // Tambahkan script Midtrans Snap
     const script = document.createElement("script");
     script.src = snapScriptUrl;
     script.setAttribute("data-client-key", clientKey);
@@ -19,7 +18,6 @@ export default function Home() {
     document.body.appendChild(script);
 
     return () => {
-      // Hapus script saat komponen unmount
       document.body.removeChild(script);
     };
   }, []);
@@ -29,7 +27,6 @@ export default function Home() {
       {/* Hero Section */}
       <Hero />
 
-      {/* Product List Section */}
       <div className="p-10 md:px-36 lg:px-48">
         <ProductList />
       </div>

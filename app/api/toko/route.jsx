@@ -25,7 +25,6 @@ export async function GET(req) {
       return NextResponse.json(product[0]);
     }
 
-    // Jika tidak ada productId, kembalikan daftar produk umum
     const result = await db.select().from(productsTable);
     return NextResponse.json(result);
   } catch (error) {

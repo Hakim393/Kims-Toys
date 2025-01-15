@@ -23,7 +23,6 @@ export async function POST(req) {
     console.log("Data user dari database:", userData);
 
     if (userData?.length === 0) {
-      // Menambahkan user ke database jika belum ada
       const result = await db
         .insert(usersTable)
         .values({

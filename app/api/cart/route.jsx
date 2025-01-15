@@ -3,12 +3,11 @@ import { NextResponse } from "next/server";
 import { db } from "@/configs/db";
 import { and, eq } from "drizzle-orm";
 
-// Menambahkan produk ke keranjang (atau menambah jumlah jika sudah ada)
+// Menambahkan produk ke keranjang
 export async function POST(req) {
   try {
     const { email, productId } = await req.json();
 
-    // Validasi input
     if (!email || !productId) {
       return NextResponse.json(
         { error: "Email dan productId wajib diisi." },
