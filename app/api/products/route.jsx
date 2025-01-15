@@ -135,14 +135,6 @@ export async function PATCH(req) {
   );
 }
 
-// ANALYZE
-export async function POST_ANALYZE(req) {
-  return NextResponse.json(
-    { message: " analisis belum diaktifkan." },
-    { status: 200 }
-  );
-}
-
 // DELETE
 export async function DELETE(req) {
   return NextResponse.json(
