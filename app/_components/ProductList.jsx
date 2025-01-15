@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCardItem from "./ProductCardItem";
 import { useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 function ProductList() {
   const [productList, setProductList] = useState([]);
@@ -39,9 +40,11 @@ function ProductList() {
       <h2 className="font-bold text-lg flex justify-between items-center">
         Penjualan :
         <span>
-          <Button className="px-6 py-2 bg-yellow-500 text-white text-sm sm:text-md font-bold rounded-full hover:bg-sky-600 focus:ring-2 focus:ring-pink-400 focus:outline-none shadow-lg">
-            Lihat semua
-          </Button>
+          <Link href={"/toko"}>
+            <Button className="px-6 py-2 bg-yellow-500 text-white text-sm sm:text-md font-bold rounded-full hover:bg-sky-600 focus:ring-2 focus:ring-pink-400 focus:outline-none shadow-lg">
+              Lihat semua
+            </Button>
+          </Link>
         </span>
       </h2>
 

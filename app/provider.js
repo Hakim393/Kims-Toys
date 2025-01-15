@@ -4,7 +4,6 @@ import Header from "./_components/Header";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { CartContext } from "./_context/CartContext";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function Provider({ children }) {
   const { user } = useUser();
@@ -49,12 +48,8 @@ function Provider({ children }) {
   return (
     <div>
       <CartContext.Provider value={{ cart, setCart }}>
-        <PayPalScriptProvider
-          options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
-        >
-          <Header />
-          <div>{children}</div>
-        </PayPalScriptProvider>
+        <Header />
+        <div>{children}</div>
       </CartContext.Provider>
     </div>
   );

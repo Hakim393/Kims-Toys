@@ -26,7 +26,7 @@ export async function GET(req) {
     }
 
     // Jika tidak ada productId, kembalikan daftar produk umum
-    const result = await db.select().from(productsTable).limit(9);
+    const result = await db.select().from(productsTable);
     return NextResponse.json(result);
   } catch (error) {
     console.error("Error in GET request:", error);
@@ -39,9 +39,9 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
-    const { limit = 9, search = "", filter = "", sort = "" } = await req.json();
+    const { search = "", filter = "", sort = "" } = await req.json();
 
-    console.log("Input Request:", { limit, search, filter, sort });
+    console.log("Input Request:", { search, filter, sort });
 
     let query = db.select().from(productsTable);
     const whereConditions = [];
@@ -50,7 +50,8 @@ export async function POST(req) {
       whereConditions.push(
         or(
           ilike(productsTable.title, `%${search}%`),
-          ilike(productsTable.category, `%${search}%`)
+          ilike(productsTable.category, `%${search}%`),
+          ilike(productsTable.info, `%${search}%`)
         )
       );
     }
@@ -77,7 +78,6 @@ export async function POST(req) {
     // }
 
     // Limit data
-    query = query.limit(limit);
     console.log("Generated Query:", query.toSQL());
     const result = await query;
     console.log("Query Result:", result);

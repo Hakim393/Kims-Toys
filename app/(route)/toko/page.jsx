@@ -48,7 +48,6 @@ function Toko() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("price:asc");
-  const [limit, setLimit] = useState(9);
 
   const GetProductList = async () => {
     try {
@@ -57,7 +56,6 @@ function Toko() {
         search,
         filter,
         sort,
-        limit,
       });
       console.log("Hasil response API:", result.data);
       setProductList(result.data);
@@ -83,7 +81,7 @@ function Toko() {
 
   useEffect(() => {
     GetProductList();
-  }, [filter, sort, limit]);
+  }, [filter, sort]);
 
   return (
     <div className="mt-10 px-4 lg:px-8">
