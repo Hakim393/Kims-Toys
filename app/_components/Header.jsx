@@ -227,7 +227,7 @@ function Header() {
             variant="destructive"
             className="text-xs sm:text-sm md:text-md"
           >
-            Jual Product
+            Masuk Akun
           </Button>
         </Link>
         <UserButton />
