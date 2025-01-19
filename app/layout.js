@@ -19,6 +19,10 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <meta
+            name="google-site-verification"
+            content="iYpWCm4hsh3jgbMzl2qNnzcA75SEj-qPDW8f56Lawtc"
+          />
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
